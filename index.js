@@ -4,6 +4,10 @@ function wait(ms) {
 
 const rows = 29;
 
+document.getElementById("mobile-input").addEventListener('keydown', (e) => {
+  const newEvent = new KeyboardEvent(e.type, e);
+});
+
 let do_intro = true;
 let cmd_prompt = "about";
 
@@ -231,6 +235,10 @@ document.addEventListener("keydown", (event) => {
     document
         .getElementById("prompt")
         .innerText = cmd_prompt;
+});
+
+console_text_element.addEventListener('click', () => {
+    document.getElementById("mobile-input").focus();
 });
 
 main();

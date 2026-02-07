@@ -20,10 +20,6 @@ body {
     animation: monitor-on 5s ease;
 }
 
-svg {
-	fill: var(--green);
-}
-
 *::selection {
     background: green;
     color: white;
@@ -31,6 +27,16 @@ svg {
 
 a {
     color: lightgreen;
+}
+
+.mobile-input {
+  position: fixed;
+  top: -100px; /* Hide off-screen */
+  left: 0;
+  width: 100px;
+  height: 40px;
+  opacity: 0;
+  pointer-events: none;
 }
 
 .console {

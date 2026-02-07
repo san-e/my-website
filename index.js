@@ -11,6 +11,7 @@ let delete_word = false;
 
 let screen_buffer = [];
 let console_text_element = document.getElementById("text");
+const mobileInput = document.getElementById("mobile-input");
 
 let bios = [
     `Award Modular BIOS v4.51PG, An Energy Star Ally
@@ -234,7 +235,19 @@ function input_handler(event) {
 }
 
 document.addEventListener("keydown", input_handler);
-document.getElementById("mobile-input").addEventListener('keydown', input_handler);
+
+mobileInput.addEventListener('input', () => {
+  cmd_prompt = mobileInput.value;
+  document.getElementById("prompt").innerText = cmd_prompt;
+});
+
+mobileInput.addEventListener('keydown', (e) => {
+  if (e.key === 'Enter') {
+    e.preventDefault();
+    submit_prompt();
+    mobileInput.value = '';
+  }
+});
 
 console_text_element.addEventListener('click', () => {
     document.getElementById("mobile-input").focus();

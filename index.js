@@ -163,7 +163,6 @@ const explanations = {
     "echo": "Print given message to screen",
     "help": "Show list of available commands",
     "reboot": "Reboot this computer",
-    "starfield": "Neat little animation"
 }
 
 function show_help() {
@@ -244,23 +243,25 @@ function input_handler(event) {
         .innerText = cmd_prompt;
 }
 
-document.addEventListener("keydown", input_handler);
+if (navigator.userAgentData?.mobile) {
+    mobileInput.addEventListener('input', () => {
+    cmd_prompt = mobileInput.value;
+    document.getElementById("prompt").innerText = cmd_prompt;
+    });
 
-mobileInput.addEventListener('input', () => {
-  cmd_prompt = mobileInput.value;
-  document.getElementById("prompt").innerText = cmd_prompt;
-});
+    mobileInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+        e.preventDefault();
+        submit_prompt();
+        mobileInput.value = '';
+    }
+    });
 
-mobileInput.addEventListener('keydown', (e) => {
-  if (e.key === 'Enter') {
-    e.preventDefault();
-    submit_prompt();
-    mobileInput.value = '';
-  }
-});
-
-console_text_element.addEventListener('click', () => {
-    document.getElementById("mobile-input").focus();
-});
+    console_text_element.addEventListener('click', () => {
+        document.getElementById("mobile-input").focus();
+    });
+} else {
+    document.addEventListener("keydown", input_handler);
+}
 
 main();

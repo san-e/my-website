@@ -167,7 +167,17 @@ const explanations = {
 }
 
 function show_help() {
-    push_to_console(`Available commands:\n  ${Object.keys(commands).map((command => {return Object.keys(explanations).includes(command) ? `${command}\t\t- ${explanations[command]}`: command})).join("\n  ")}`)
+  const cmds = Object.keys(commands);
+  const maxLen = Math.max(...cmds.map(c => c.length));
+
+  const lines = cmds.map(command => {
+    if (!(command in explanations)) return command;
+
+    const padded = command.padEnd(maxLen, " ");
+    return `${padded}  - ${explanations[command]}`;
+  });
+
+  push_to_console(`Available commands:\n  ${lines.join("\n  ")}`);
 }
 
 function do_command() {

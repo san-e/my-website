@@ -4,10 +4,6 @@ function wait(ms) {
 
 const rows = 29;
 
-document.getElementById("mobile-input").addEventListener('keydown', (e) => {
-  const newEvent = new KeyboardEvent(e.type, e);
-});
-
 let do_intro = true;
 let cmd_prompt = "about";
 
@@ -206,7 +202,7 @@ async function main() {
     }
 }
 
-document.addEventListener("keydown", (event) => {
+function input_handler(event) {
     const keyName = event.key;
     if (keyName === "Backspace") {
         if (event.ctrlKey) {
@@ -235,7 +231,10 @@ document.addEventListener("keydown", (event) => {
     document
         .getElementById("prompt")
         .innerText = cmd_prompt;
-});
+}
+
+document.addEventListener("keydown", input_handler);
+document.getElementById("mobile-input").addEventListener('keydown', input_handler);
 
 console_text_element.addEventListener('click', () => {
     document.getElementById("mobile-input").focus();

@@ -7,7 +7,8 @@ const rows = 29;
 let do_intro = true;
 let cmd_prompt = "about";
 
-let delete_word = false;
+let command_history = [];
+let command_history_idx = -1;
 
 let screen_buffer = [];
 let console_text_element = document.getElementById("text");
@@ -151,6 +152,7 @@ Type "help" to view the available commands and look around a bit :)`)
     "clear": clear_console,
     "echo": push_to_console,
     "help": show_help,
+    "eval": evalb,
     "reboot": () => {
         location.reload()
     },
@@ -163,6 +165,11 @@ const explanations = {
     "echo": "Print given message to screen",
     "help": "Show list of available commands",
     "reboot": "Reboot this computer",
+    "eval": "Execute given Javascript"
+}
+
+function evalb(...args) {
+    eval(args.join(" "));
 }
 
 function show_help() {

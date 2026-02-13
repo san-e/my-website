@@ -250,7 +250,11 @@ function input_handler(event) {
         .innerText = cmd_prompt;
 }
 
-if (navigator.userAgentData?.mobile) {
+const isMobile = (navigator.userAgentData?.mobile) || 
+                 (navigator.userAgent.toLowerCase().includes('mobile')) ||
+                 (window.innerWidth < 800);
+
+if (isMobile) {
     mobileInput.addEventListener('input', () => {
     cmd_prompt = mobileInput.value;
     document.getElementById("prompt").innerText = cmd_prompt;

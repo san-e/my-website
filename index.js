@@ -264,7 +264,7 @@ if (navigator.userAgentData?.mobile) {
     }
     });
 
-    document.getElementById("full_prompt").addEventListener('click', () => {
+    document.getElementById("console").addEventListener('click', () => {
         document.getElementById("mobile-input").focus();
     });
 } else {
